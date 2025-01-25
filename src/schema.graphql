@@ -1,0 +1,50 @@
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  created_at: String!
+  orders: [Order!]!
+}
+
+type Vendor {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  address: String!
+  created_at: String!
+  menus: [Menu!]!
+}
+
+type Menu {
+  id: ID!
+  vendor_id: Int!
+  name: String!
+  price: Float!
+  category: String!
+  is_available: Boolean!
+}
+
+type Order {
+  id: ID!
+  userId: Int!
+  menu_id: Int!
+  quantity: Int!
+  status: String!
+  created_at: String!
+}
+
+type Query {
+  fetchVendors(limit: Int, offset: Int): [Vendor!]!
+  fetchOrdersByUser(userId: Int!, limit: Int, offset: Int): [Order!]!
+}
+
+
+type Mutation {
+  addUser(name: String!, email: String!, phone: String!): User!
+  addVendor(name: String!, email: String!, phone: String!, address: String!): Vendor!
+  addMenu(vendor_id: Int!, name: String!, price: Float!, category: String!): Menu!
+  placeOrder(userId: Int!, menu_id: Int!, quantity: Int!): Order!
+  updateOrderStatus(orderId: Int!, status: String!): Order!
+}
