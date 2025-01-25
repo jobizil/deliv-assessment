@@ -34,17 +34,22 @@ model Menu {
     category     String
     is_available Boolean @default(true)
     vendor       Vendor  @relation(fields: [vendor_id], references: [id])
-
-    Order Order[]
+    Order        Order[]
 }
 
 model Order {
-    id         Int      @id @default(autoincrement())
-    userId     Int
+    id         Int        @id @default(autoincrement())
+    user_id    Int
     menu_id    Int
     quantity   Int
-    status     String   @default("PENDING")
-    created_at DateTime @default(now())
-    user       User     @relation(fields: [userId], references: [id])
-    menu       Menu     @relation(fields: [menu_id], references: [id])
+    status     StatusEnum @default(PENDING)
+    created_at DateTime   @default(now())
+    user       User       @relation(fields: [user_id], references: [id])
+    menu       Menu       @relation(fields: [menu_id], references: [id])
+}
+
+enum StatusEnum {
+    PENDING
+    COMPLETED
+    CANCELLED
 }

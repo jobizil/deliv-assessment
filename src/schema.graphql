@@ -28,7 +28,7 @@ type Menu {
 
 type Order {
   id: ID!
-  userId: Int!
+  user_id: Int!
   menu_id: Int!
   quantity: Int!
   status: String!
@@ -37,14 +37,14 @@ type Order {
 
 type Query {
   fetchVendors(limit: Int, offset: Int): [Vendor!]!
-  fetchOrdersByUser(userId: Int!, limit: Int, offset: Int): [Order!]!
+  fetchOrdersByUser(user_id: Int!, limit: Int, offset: Int): [Order!]!
 }
 
 
 type Mutation {
-  addUser(name: String!, email: String!, phone: String!): User!
-  addVendor(name: String!, email: String!, phone: String!, address: String!): Vendor!
+  createUser(name: String!, email: String!, phone: String!): User!
+  createVendor(name: String!, email: String!, phone: String!, address: String!): Vendor!
   addMenu(vendor_id: Int!, name: String!, price: Float!, category: String!): Menu!
-  placeOrder(userId: Int!, menu_id: Int!, quantity: Int!): Order!
-  updateOrderStatus(orderId: Int!, status: String!): Order!
+  placeOrder(user_id: Int!, menu_id: Int!, quantity: Int!): Order!
+  updateOrderStatus(order_id: Int!, status: String!): Order!
 }
